@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+  <script src="{{ url_for('static', filename='pedidos.js') }}"></script>
+  <div class="jumbo">
+    <h2>Faça sua compra<h2>
+    <form>
+        <div class="form-group row">
+            <label for="produto" class="col-sm-2 col-form-label">Produto:</label>
+            <div class="col-sm-10">
+                <input type="text" id="produto" class="form-control"  value=""/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="quantidade" class="col-sm-2 col-form-label">Quantidade:</label>
+            <div class="col-sm-10">
+                <input type="text" id="quantidade" class="form-control" value=""/>
+            </div>
+        </div>
+        <input type="button" id="comprar" value="comprar" class="btn btn-primary"/>
+    </form>
+  </div>
+{% endblock %}

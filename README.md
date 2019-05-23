@@ -15,16 +15,29 @@ use os comandos:
 instale o microframework flask:  
 `pip install flask`  
 
+### instalação para o activemq  
 instale a biblioteca para stomp:  
 `pip install stompest`  
+
+### instalação para o rabbitmq  
+`pip install pika --upgrade` 
 
 instale as bibliotecas para transformar objetos python em json e vice-versa:  
 `pip install marshmallow-dataclass`  
 `pip install marshmallow-enum`  
 
-`pip install recordclass`   
-`pip install simplejson`  
+### instalação dos plugins para mysql/sqlalchemy  
+
+`pip install sqlalchemy`  
+`pip install Flask-SQLAlchemy`
+`pip install pymysql`  
 
 ### tutorial python com mongodb
 
 https://realpython.com/introduction-to-mongodb-and-python/
+
+### configurando debug
+
+`pip install PDBSublimeTextSupport`
+
+no sublime instale o pacote: Python Breakpoint
