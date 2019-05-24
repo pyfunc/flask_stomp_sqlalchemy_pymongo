@@ -2,16 +2,15 @@ import pika
 
 class RabbitCli():
 
-    def send(self, productname, quantity):
-        print('send do cli', flush=True)
+    def send(self, nome, quantidade):
         connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
         channel = connection.channel()
 
-        channel.queue_declare(queue='hello')
+        channel.queue_declare(queue='pedidos_de_produtos')
 
         channel.basic_publish(exchange='',
-                      routing_key='hello',
-                      body='{"productName":"'+productname+'","quantity":"'+quantity+'","status":"Created","orderId":123}')
+                      routing_key='pedidos_de_produtos',
+                      body='{"nome":"'+nome+'","quantidade":"'+quantidade+'","status":"Created","id":123}')
         print(" [x] Sent Message!", flush=True)
 
         connection.close()

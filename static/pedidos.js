@@ -1,12 +1,13 @@
 $(document).ready(function(){
 
 $("#comprar").click(function(){
-  var produto = $("#produto").val();
+  var nome = $("#nome").val();
   var quantidade = $("#quantidade").val();
+  //$.post("/activemq_enviar",
   $.post("/rabbit_enviar",
   {
-    name: produto,
-    quantity: quantidade
+    nome: nome,
+    quantidade: quantidade
   },
   function(data, status){
     alert("Data: " + data + "\nStatus: " + status);

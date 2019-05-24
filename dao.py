@@ -31,7 +31,39 @@ class Diretor(Base):
  
     def __repr__(self):
         return "Diretor(%r)" % (self.nome)
+
+class Produto(Base):
+    __tablename__ = 'produtos'
  
+    id = Column(Integer, primary_key=True)
+    nome = Column(String(50), nullable=False, unique=True)
+    quantidade = Column(Integer, nullable=False, unique=False) 
+    status = Column(Integer, ForeignKey('status_pedido.id'))
+ 
+    #nao vejo um status via tabela a principio como a melhor abordagem
+    #depende de como serao integrados os sistemas, mas ainda sim, por mim provavelmente sera uma abordagem problematica,
+    #utilizei pela simplicidade e para exemplo apenas
+    status_pedido = relation("StatusPedido", backref='produtos', lazy=False)
+
+    def __init__(self, nome=None,quantidade=None):
+        self.nome = nome
+        self.quantidade = quantidade
+ 
+    def __repr__(self):
+        return "Produto(%r, %r, %r)" % (self.nome, self.quantidade, self.status)
+
+class StatusPedido(Base):
+    __tablename__ = 'status_pedido'
+
+    id = Column(Integer, primary_key=True)
+    nome = Column(String(30), nullable=False, unique=True)
+
+    def __init__(self, nome=None):
+        self.nome = nome
+
+    def __repr__(self):
+        return "StatusPedido(%r)" % (self.nome)
+
 engine = create_engine('mysql+pymysql://maria:123@localhost/brlabs?host=localhost?port=3306')
 Base.metadata.create_all(engine)
 
@@ -39,7 +71,21 @@ Base.metadata.create_all(engine)
                                          autoflush=False,
                                          bind=engine))
 '''
-class Dao():
+class ProdutoDao():
+    def gravar(self, nome, quantidade, status):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+
+        produto = Produto(nome, quantidade)
+        produto.status_pedido = StatusPedido(status)
+
+        try:
+            session.add(produto)
+            session.commit()
+        except:
+            session.rollback()
+
+class FilmeDao():
     def gravar(self):
         Session = sessionmaker(bind=engine)
         session = Session()
