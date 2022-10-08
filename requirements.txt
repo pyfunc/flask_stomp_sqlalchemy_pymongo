@@ -1,0 +1,9 @@
+flask
+stompest
+pika
+marshmallow-dataclass
+marshmallow-enum
+sqlalchemy
+Flask-SQLAlchemy
+pymysql
+PDBSublimeTextSupport
